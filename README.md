@@ -46,7 +46,7 @@ En el directorio de tu proyecto, tu puedes correr el siguiente comando:
 Tal y como se muestra en el siguiente ejemplo: 
 ![Ejemplo de captura de pantalla](src/capturas/InicioReact.jpg)
 
-El pryecto correra en la siguiente direccion.\
+El proyecto correra en la siguiente direccion.\
 Abre [http://localhost:3000](http://localhost:3000) para ver tu proyecto.
 
 
