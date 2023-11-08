@@ -54,6 +54,13 @@ class TablaUsuarios extends Component {
             last: 'Último',
           },
         },
+      // Define la configuración para ocultar la columna del ID
+      columnDefs: [
+        {
+          targets: 0, // Índice de la columna del ID (0 basado en cero)
+          visible: false, // Oculta la columna
+        },
+      ],
       });
     }
   }
