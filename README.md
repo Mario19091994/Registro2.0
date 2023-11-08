@@ -9,6 +9,8 @@ Módulo de Gestión de Contenido:
 • Registro de usuario
 • Mostrar usuario
 
+![Ejemplo de captura de pantalla](registro2.0/src/capturas de pantalla/Inicio.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
