@@ -9,7 +9,7 @@ Módulo de Gestión de Contenido:
 • Registro de usuario
 • Mostrar usuario
 
-![Ejemplo de captura de pantalla](registro2.0/src/capturas/Inicio1.jpg)
+![Ejemplo de captura de pantalla](src/capturas/Inicio1.jpg)
 
 ## Available Scripts
 
