@@ -14,7 +14,7 @@ contacto y un numero alternativo de contacto.
 
 ## Iniciar tu api
 
-Antes de empesar a correr tu proyecto de react, es necesario hacer la coneccion a la base de datos en este caso nuestra base de datos ya que si ella nuestro proyecto no lograra andar, para eso es necesario una api, en la cual viene incluido dentro de la carpeta, pero para que puedas correrla esta debe de correr aparte, se recomienda correr en una terminal el api y luego correr el proyecto de react:
+Antes de empezar a correr tu proyecto de react, es necesario hacer la coneccion a la base de datos en este caso nuestra base de datos ya esta hecha en un servidor local, pero se comparte una query en donde podran hacerla junto con la tabla y los store proces necesarios para que funcione, que sin ella nuestro proyecto no lograra andar, para eso es necesario una api, en la cual viene incluido dentro de la carpeta tambien, pero para que puedas correrla esta debe de correr aparte, se recomienda correr en una terminal el api y en otra termila correr el proyecto de react, a continuacion comparto una imagen de las dos carpetas del api y sql:
 
 ![Ejemplo de captura de pantalla](src/capturas/Api.jpg)
 
