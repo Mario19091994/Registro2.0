@@ -98,7 +98,7 @@ class TablaUsuarios extends Component {
       // Cierra el modal y restablece el usuario seleccionado
       this.setState({ modalVisible: false, usuarioSeleccionado: null });
     };
-  handleActualizarDatos = async () => {
+    handleActualizarDatos = async () => {
       const { usuarioSeleccionado } = this.state;
     
       try {
@@ -113,7 +113,8 @@ class TablaUsuarios extends Component {
         if (!response.ok) {
           throw new Error('Error al actualizar datos');
         }
-    
+        // Cierra el modal y restablece el usuario seleccionado
+        this.setState({ modalVisible: false, usuarioSeleccionado: null });
         // SweetAlert para mostrar mensaje de datos actualizados
         await Swal.fire({
           title: "Datos Actualizados",
@@ -124,12 +125,13 @@ class TablaUsuarios extends Component {
         // Recargar la página después de cerrar la alerta
         window.location.reload();
     
-        // Cierra el modal y restablece el usuario seleccionado
-        this.setState({ modalVisible: false, usuarioSeleccionado: null });
+    
       } catch (error) {
         console.error('Error al actualizar datos:', error);
       }
-  };
+    };
+    
+    
     
   render() {
     const { usuarios, usuarioSeleccionado, modalVisible } = this.state;
@@ -144,9 +146,8 @@ class TablaUsuarios extends Component {
           <Modal.Body>
           <form>
       <div className="form-group row">
-        <label className="col-sm-3 col-form-label">ID:</label>
         <div className="col-sm-6">
-          <input type="text" className="form-control" value={usuarioSeleccionado?.Id} readOnly />
+          <input type="hidden" className="form-control" value={usuarioSeleccionado?.Id} readOnly />
         </div>
       </div>
       <div className="form-group row">
@@ -238,7 +239,7 @@ class TablaUsuarios extends Component {
                 <td>{usuario.Email}</td>
                 <td>{usuario.Telalt}</td>
                 <td>
-                <Button onClick={() => this.handleEditar(usuario)}>Editar</Button>
+                <Button variant="warning" onClick={() => this.handleEditar(usuario)}>Editar</Button>
                 </td>
               </tr>
             ))}
