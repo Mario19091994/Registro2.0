@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-dt/css/jquery.dataTables.css'; // Estilo de DataTable
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import $ from 'jquery'; // Importa jQuery
 import DataTable from 'datatables.net-dt';
 
 class TablaUsuarios extends Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
       usuarios: [],
+      usuarioSeleccionado: {
+        Id: '',
+        Nombre: '',
+        Appaterno: '',
+        Apmaterno: '',
+        Telefono: '',
+        Email: '',
+        Telalt: '',
+      },
+      modalVisible: false,
     };
     this.tableRef = React.createRef();
     this.dataTable = null;
@@ -34,6 +47,7 @@ class TablaUsuarios extends Component {
       .catch((error) => {
         console.error('There was a problem with the fetch operation:', error);
       });
+      
   }
   //Se ponen los datos de datatable en español
   initDataTable() {
@@ -65,11 +79,126 @@ class TablaUsuarios extends Component {
     }
   }
 
+  handleEditar(usuario) {
+    this.setState({ usuarioSeleccionado: usuario, modalVisible: true });
+  }
+
+  handleInputChange(event, fieldName) {
+    const { value } = event.target;
+    this.setState((prevState) => ({
+      usuarioSeleccionado: {
+        ...prevState.usuarioSeleccionado,
+        [fieldName]: value,
+      },
+    }));
+  }
+
+  handleCloseModal = async () => {
+    const { usuarioSeleccionado } = this.state;
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/usuarios', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuarioSeleccionado),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al actualizar datos');
+      }
+
+      // Cierra el modal y restablece el usuario seleccionado
+      this.setState({ modalVisible: false, usuarioSeleccionado: null });
+    } catch (error) {
+      console.error('Error al actualizar datos:', error);
+    }
+  };
   render() {
+    const { usuarios, usuarioSeleccionado, modalVisible } = this.state;
     return (
+      <Container fluid>
       <div>
         <h2>Empleados registrados</h2>
-        <table className="table table-striped table-bordered" ref={this.tableRef}>
+        <Modal show={modalVisible} onHide={this.handleCloseModal} dialogClassName="modal-responsive">
+          <Modal.Header closeButton>
+            <Modal.Title>Editar Usuario</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <form>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">ID:</label>
+        <div className="col-sm-6">
+          <input type="text" className="form-control" value={usuarioSeleccionado?.Id} readOnly />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Nombre:</label>
+        <div className="col-sm-6">
+          <input   type="text"
+          className="form-control"
+          value={usuarioSeleccionado?.Nombre}
+          onChange={(e) => this.handleInputChange(e, 'Nombre')}/>
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Apellido Paterno:</label>
+        <div className="col-sm-6">
+          <input   type="text"
+          className="form-control"
+          value={usuarioSeleccionado?.Appaterno}
+          onChange={(e) => this.handleInputChange(e, 'Appaterno')}/>
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Apellido Materno:</label>
+        <div className="col-sm-6">
+        <input   type="text"
+          className="form-control"
+          value={usuarioSeleccionado?.Apmaterno}
+          onChange={(e) => this.handleInputChange(e, 'Apmaterno')}/>
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Teléfono:</label>
+        <div className="col-sm-6">
+        <input   type="number"
+          className="form-control"
+          value={usuarioSeleccionado?.Telefono}
+          onChange={(e) => this.handleInputChange(e, 'Telefono')}/>        
+          </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Email:</label>
+        <div className="col-sm-6">
+        <input   type="email"
+          className="form-control"
+          value={usuarioSeleccionado?.Email}
+          onChange={(e) => this.handleInputChange(e, 'Email')}/>         
+          </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-3 col-form-label">Teléfono Alternativo:</label>
+        <div className="col-sm-6">
+        <input   type="number"
+          className="form-control"
+          value={usuarioSeleccionado?.Telalt}
+          onChange={(e) => this.handleInputChange(e, 'Telalt')}/>         
+          </div>
+      </div>
+    </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleCloseModal}>
+              Cerrar
+            </Button>
+            <Button variant="primary" onClick={this.handleCloseModal}>
+              Guardar Cambios
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <table className="table table-striped table-bordered table-responsive" ref={this.tableRef}>
           <thead>
             <tr>
               <th>ID</th>
@@ -79,6 +208,7 @@ class TablaUsuarios extends Component {
               <th>Teléfono</th>
               <th>Email</th>
               <th>Teléfono Alternativo</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -91,11 +221,15 @@ class TablaUsuarios extends Component {
                 <td>{usuario.Telefono}</td>
                 <td>{usuario.Email}</td>
                 <td>{usuario.Telalt}</td>
+                <td>
+                <Button onClick={() => this.handleEditar(usuario)}>Editar</Button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      </Container>
     );
   }
 }

@@ -69,14 +69,16 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    
+    <Modal show={show} onHide={handleClose} dialogClassName="modal-responsive">
     <Modal.Header closeButton>
       <Modal.Title>Insertar Datos</Modal.Title>
     </Modal.Header>
     <Modal.Body>
         <form>
-         <div className="form-group">
-  <label>Nombre</label>
+  <div className="form-group">
+  <label className="col-sm-6 col-form-label">Nombre</label>
+  <div className="col-sm-9">
   <input
     type="text"
     name="Nombre"
@@ -86,9 +88,11 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Escribe el nombre"
     required
   />
+  </div>
 </div>
 <div className="form-group">
-  <label>Apellido Paterno</label>
+  <label className="col-sm-6 col-form-label">Apellido Paterno</label>
+  <div className="col-sm-9">
   <input
     type="text"
     name="Appaterno"
@@ -98,9 +102,11 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Escribe el apellido paterno"
     required
   />
+  </div>
 </div>
-<div className="form-group">
-  <label>Apellido Materno</label>
+<div className="form-group row">
+  <label className="col-sm-6 col-form-label">Apellido Materno</label>
+  <div className="col-sm-9">
   <input
     type="text"
     name="Apmaterno"
@@ -110,9 +116,11 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Escribe el apellido materno"
     required
   />
+  </div>
 </div>
 <div className="form-group">
-  <label>Teléfono</label>
+  <label className="col-sm-6 col-form-label">Teléfono</label>
+  <div className="col-sm-9">
   <input
     type="number"
     name="Telefono"
@@ -122,9 +130,11 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Teléfono"
     required
   />
+  </div>
 </div>
 <div className="form-group">
-  <label>Email</label>
+  <label className="col-sm-6 col-form-label">Email</label>
+  <div className="col-sm-9">
   <input
     type="email"
     name="Email"
@@ -134,9 +144,12 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Email"
     required
   />
+  </div>
 </div>
 <div className="form-group">
-  <label>Teléfono alternativo</label>
+  <label className="col-sm-6 col-form-label">Teléfono alternativo</label>
+  <div className="col-sm-9">
+
   <input
     type="number"
     name="Telalt"
@@ -146,6 +159,7 @@ function FormularioInsertarDatos({ cerrarModal, insertarDatos }) {
     placeholder="Teléfono alternativo"
     required
   />
+  </div>
 </div>
         </form>
         </Modal.Body>
