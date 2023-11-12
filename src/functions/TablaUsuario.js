@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import $ from 'jquery'; // Importa jQuery
+import Swal from 'sweetalert2';
 import DataTable from 'datatables.net-dt';
 
 class TablaUsuarios extends Component {
@@ -94,27 +95,42 @@ class TablaUsuarios extends Component {
   }
 
   handleCloseModal = async () => {
-    const { usuarioSeleccionado } = this.state;
-
-    try {
-      const response = await fetch('http://127.0.0.1:5000/usuarios', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuarioSeleccionado),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al actualizar datos');
-      }
-
       // Cierra el modal y restablece el usuario seleccionado
       this.setState({ modalVisible: false, usuarioSeleccionado: null });
-    } catch (error) {
-      console.error('Error al actualizar datos:', error);
-    }
+    };
+  handleActualizarDatos = async () => {
+      const { usuarioSeleccionado } = this.state;
+    
+      try {
+        const response = await fetch('http://127.0.0.1:5000/usuarios', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(usuarioSeleccionado),
+        });
+    
+        if (!response.ok) {
+          throw new Error('Error al actualizar datos');
+        }
+    
+        // SweetAlert para mostrar mensaje de datos actualizados
+        await Swal.fire({
+          title: "Datos Actualizados",
+          text: `Nombre: ${usuarioSeleccionado.Nombre} ${usuarioSeleccionado.Appaterno} ${usuarioSeleccionado.Apmaterno}`,
+          icon: "success",
+        });
+    
+        // Recargar la página después de cerrar la alerta
+        window.location.reload();
+    
+        // Cierra el modal y restablece el usuario seleccionado
+        this.setState({ modalVisible: false, usuarioSeleccionado: null });
+      } catch (error) {
+        console.error('Error al actualizar datos:', error);
+      }
   };
+    
   render() {
     const { usuarios, usuarioSeleccionado, modalVisible } = this.state;
     return (
@@ -193,7 +209,7 @@ class TablaUsuarios extends Component {
             <Button variant="secondary" onClick={this.handleCloseModal}>
               Cerrar
             </Button>
-            <Button variant="primary" onClick={this.handleCloseModal}>
+            <Button variant="primary" onClick={this.handleActualizarDatos}>
               Guardar Cambios
             </Button>
           </Modal.Footer>
