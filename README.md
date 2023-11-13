@@ -11,7 +11,7 @@ contacto y un numero alternativo de contacto.
 ![Ejemplo de captura de pantalla](src/capturas/Registro3.jpg)
 #### • Mostrar usuario
 ![Ejemplo de captura de pantalla](src/capturas/Inicio1.jpg)
-##Aplicacion instalable en la computadora
+## Aplicacion instalable en la computadora
 Al momento de correr nuestro programa nos permite instalar como una aplicacion en nuestra computadora
 ![Ejemplo de captura de pantalla](src/capturas/DescargaApp1.jpg)
 ![Ejemplo de captura de pantalla](src/capturas/app3.jpg)
