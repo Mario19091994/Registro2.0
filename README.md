@@ -1,6 +1,6 @@
 # Registro 2.0
 
-La aplicación constaba con una tabla conde se muestran los usuarios 
+La aplicación constaba con una tabla donde se muestran los usuarios 
 registrados, con alguna información general, como: Nombre completo con 
 campos separados, número telefónico ya sea de casa o celular, un correo de 
 contacto y un numero alternativo de contacto.
