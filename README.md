@@ -7,6 +7,7 @@ contacto y un numero alternativo de contacto.
 ## Funciones
 ### Módulo de Gestión de Contenido:
 #### • Registro de usuario
+![Ejemplo de captura de pantalla](src/capturas/registro.jpg)
 ![Ejemplo de captura de pantalla](src/capturas/Registro2.jpg)
 ![Ejemplo de captura de pantalla](src/capturas/Registro3.jpg)
 #### • Mostrar usuario
