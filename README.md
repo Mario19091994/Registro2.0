@@ -50,5 +50,8 @@ Tal y como se muestra en el siguiente ejemplo:
 El proyecto correra en la siguiente direccion.\
 Abre [http://localhost:3000](http://localhost:3000) para ver tu proyecto.
 
+## Nota importante
+En la carpeta sql hay una consulta sql la cual sirve para crear la base de datos, la tabla y los stored procedures por los cuales son necesarios para que funcione el api de python, ademas de que se le debe de dar unas modificaciones al stored procedure de insertar y modificar, Para esto nos dirigimos a nuestra base de datos y nos desplazamos a nuestra capeta que dice "programmability" luego buscamos la carpeta de "stored procedures" buscamos los procedures y damos clic derecho y damos clic en "modify", esto nos permite modificar nuesto "stored procedures", le agregamos el comando "SET NOCOUNT ON" dentro del codigo y ejecutamos el codigo. El ejemplo se encuentra en la siguiente imagen:
 
+![Ejemplo de captura de pantalla](src/capturas/modificacion.jpg)
 
